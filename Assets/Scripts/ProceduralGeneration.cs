@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateGrid : MonoBehaviour
+public class ProceduralGeneration : MonoBehaviour
 {
     public GameObject blockGameObject;
     public GameObject objectToSpawn;
