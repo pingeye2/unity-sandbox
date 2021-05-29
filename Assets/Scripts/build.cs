@@ -7,22 +7,31 @@ public class build : MonoBehaviour
     public Transform buildPos;
     public GameObject buildObj;
     public Camera camera;
+    int blockCount = 0;
     Ray ray;
     RaycastHit hit;
+    BoxCollider bc;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(buildObj, buildPos.position, buildPos.rotation);
+            if (blockCount > 0)
+            {
+                Instantiate(buildObj, buildPos.position, buildPos.rotation);
+                blockCount--;
+            }
         }
         if (Input.GetMouseButtonDown(1))
         {
             ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, float.MaxValue))
+            if (Physics.Raycast(ray, out hit))
             {
-                if (hit.rigidbody)
+                bc = hit.collider as BoxCollider;
+                if (bc != null)
                 {
-                    hit.rigidbody.gameObject.SetActive(false);
+                    Destroy(bc.gameObject);
+                    blockCount++;
                 }
             }
         }

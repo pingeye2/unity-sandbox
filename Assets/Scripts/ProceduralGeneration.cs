@@ -14,10 +14,6 @@ public class ProceduralGeneration : MonoBehaviour
     private Hashtable blockContainer = new Hashtable();
     private List<Vector3> blockPositions = new List<Vector3>();
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
