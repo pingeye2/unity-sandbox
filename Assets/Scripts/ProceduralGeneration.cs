@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class ProceduralGeneration : MonoBehaviour
 {
-    public GameObject blockGameObject;
-    public GameObject objectToSpawn;
     public GameObject player;
     private int worldSizeX = 40;
     private int worldSizeZ = 40;
-    private int noiseHeight = 5;
+    private int noiseHeight = 6;
     private Vector3 startPosition;
     private Hashtable blockContainer = new Hashtable();
     private List<Vector3> blockPositions = new List<Vector3>();
-
+    private float randomSpawnNum;
+    private GameObject objectToSpawn;
+    public GameObject block1;
+    public GameObject block2;
+    public GameObject block3;
+    public GameObject block4;
 
     void Update()
     {
@@ -27,9 +30,28 @@ public class ProceduralGeneration : MonoBehaviour
                     generateNoise(x + xPlayerLocation, z + zPlayerLocation, 8f) * noiseHeight,
                     z * 1 + zPlayerLocation);
 
+                    randomSpawnNum = Random.Range(0f, 50f);
+
                     if (!blockContainer.ContainsKey(pos))
                     {
-                        GameObject block = Instantiate(blockGameObject,
+                        if (randomSpawnNum < 20f && randomSpawnNum > 0f)
+                        {
+                            objectToSpawn = block1;
+                        }
+                        else if (randomSpawnNum < 30f && randomSpawnNum > 20f)
+                        {
+                            objectToSpawn = block2;
+                        }
+                        else if (randomSpawnNum < 45f && randomSpawnNum > 30f)
+                        {
+                            objectToSpawn = block3;
+                        }
+                        else if (randomSpawnNum < 50f && randomSpawnNum > 45f)
+                        {
+                            objectToSpawn = block4;
+                        }
+
+                        GameObject block = Instantiate(objectToSpawn,
                         pos,
                         Quaternion.identity) as GameObject;
                         blockContainer.Add(pos, block);

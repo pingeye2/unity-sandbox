@@ -244,9 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc9281c620151d458c9d89f1bcb7a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockGameObject: {fileID: 5703845589923251773, guid: 3eb3218794c440e45b1ebfc4cb99eead, type: 3}
-  objectToSpawn: {fileID: 0}
   player: {fileID: 1135784285}
+  block1: {fileID: 5703845589923251773, guid: 3eb3218794c440e45b1ebfc4cb99eead, type: 3}
+  block2: {fileID: 4474767898522972025, guid: c41225d1e8216f947a424b4540f1f6d9, type: 3}
+  block3: {fileID: 3727587021087766967, guid: b7f10ad676700f248997e650be2bc79e, type: 3}
+  block4: {fileID: 3661722615339516401, guid: 377a1efa163c56745891a66e9486d2ae, type: 3}
 --- !u!4 &377890214
 Transform:
   m_ObjectHideFlags: 0
