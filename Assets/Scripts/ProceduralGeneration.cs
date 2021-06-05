@@ -96,31 +96,6 @@ public class ProceduralGeneration : MonoBehaviour
         }
     }
 
-    /*
-        private void SpawnObject()
-        {
-            for (int c = 0; c < 20; c++)
-            {
-                GameObject toPlaceObject = Instantiate(objectToSpawn,
-                objectSpawnLocation(),
-                Quaternion.identity);
-            }
-        }
-
-        private Vector3 objectSpawnLocation()
-        {
-            int rndIndex = Random.Range(0, blockPositions.Count);
-            Vector3 newPos = new Vector3(
-                blockPositions[rndIndex].x,
-                blockPositions[rndIndex].y + 0.5f,
-                blockPositions[rndIndex].z
-            );
-            blockPositions.RemoveAt(rndIndex);
-            return newPos;
-        }
-
-    */
-
     private float generateNoise(int x, int z, float detailScale)
     {
         float xNoise = (x + this.transform.position.x) / detailScale;
