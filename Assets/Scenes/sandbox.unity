@@ -245,10 +245,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1135784285}
-  block1: {fileID: 5703845589923251773, guid: 3eb3218794c440e45b1ebfc4cb99eead, type: 3}
-  block2: {fileID: 4474767898522972025, guid: c41225d1e8216f947a424b4540f1f6d9, type: 3}
-  block3: {fileID: 3727587021087766967, guid: b7f10ad676700f248997e650be2bc79e, type: 3}
-  block4: {fileID: 3661722615339516401, guid: 377a1efa163c56745891a66e9486d2ae, type: 3}
+  zone1Arr:
+  - {fileID: 5703845589923251773, guid: 3eb3218794c440e45b1ebfc4cb99eead, type: 3}
+  - {fileID: 4474767898522972025, guid: c41225d1e8216f947a424b4540f1f6d9, type: 3}
+  - {fileID: 3727587021087766967, guid: b7f10ad676700f248997e650be2bc79e, type: 3}
+  - {fileID: 3661722615339516401, guid: 377a1efa163c56745891a66e9486d2ae, type: 3}
+  zone2Arr:
+  - {fileID: 8921596655056578711, guid: 5685d44f66fe2d2488f55c254e6e5625, type: 3}
+  - {fileID: 8921596655056578711, guid: 5685d44f66fe2d2488f55c254e6e5625, type: 3}
+  - {fileID: 8921596655056578711, guid: 5685d44f66fe2d2488f55c254e6e5625, type: 3}
+  - {fileID: 8921596655056578711, guid: 5685d44f66fe2d2488f55c254e6e5625, type: 3}
+  zone3Arr:
+  - {fileID: 9083203617246292573, guid: c2c04b2503a390a4b9b5f46eeda1e0b3, type: 3}
+  - {fileID: 9083203617246292573, guid: c2c04b2503a390a4b9b5f46eeda1e0b3, type: 3}
+  - {fileID: 9083203617246292573, guid: c2c04b2503a390a4b9b5f46eeda1e0b3, type: 3}
+  - {fileID: 9083203617246292573, guid: c2c04b2503a390a4b9b5f46eeda1e0b3, type: 3}
 --- !u!4 &377890214
 Transform:
   m_ObjectHideFlags: 0
