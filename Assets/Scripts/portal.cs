@@ -9,9 +9,6 @@ public class portal : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Application.LoadLevel(Application.loadedLevel);
-            ProceduralGeneration.changeZone();
-            Debug.Log("zone changed!!");
-
         }
     }
 }

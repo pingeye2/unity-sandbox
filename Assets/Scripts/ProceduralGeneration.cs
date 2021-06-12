@@ -11,31 +11,29 @@ public class ProceduralGeneration : MonoBehaviour
     private Vector3 startPosition;
     private Hashtable blockContainer = new Hashtable();
     private List<Vector3> blockPositions = new List<Vector3>();
-    private float randomSpawnNum;
     private GameObject objectToSpawn;
-    private GameObject block0;
-    private GameObject block1;
-    private GameObject block2;
-    private GameObject block3;
-    private static float changeZoneNum;
+    private bool loadSceneOnStart;
+    private GameObject[] blocks = new GameObject[4];
+
+    //when adding new zone create new arr below and amend selectZone()
     public GameObject[] zone1Arr;
     public GameObject[] zone2Arr;
     public GameObject[] zone3Arr;
 
     void Start()
     {
-        changeZone();
+        selectZone();
+        loadSceneOnStart = true;
     }
 
     void Update()
     {
-        if (Mathf.Abs(xPlayerMove) >= 1 || Mathf.Abs(zPlayerMove) >= 1)
+        if (Mathf.Abs(xPlayerMove) >= 1 || Mathf.Abs(zPlayerMove) >= 1 || loadSceneOnStart)
         {
             for (int x = -worldSizeX; x < worldSizeX; x++)
             {
                 for (int z = -worldSizeZ; z < worldSizeZ; z++)
                 {
-                    selectZone();
                     Vector3 pos = new Vector3(x * 1 + xPlayerLocation,
                     generateNoise(x + xPlayerLocation, z + zPlayerLocation, 8f) * noiseHeight,
                     z * 1 + zPlayerLocation);
@@ -51,7 +49,6 @@ public class ProceduralGeneration : MonoBehaviour
                         block.transform.SetParent(this.transform);
                     }
                 }
-
             }
         }
     }
@@ -97,32 +94,32 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void selectBlocks()
     {
-        randomSpawnNum = Random.Range(0f, 50f);
+        float randomSpawnNum = Random.Range(0f, 50f);
 
-        if (randomSpawnNum < 20f && randomSpawnNum > 0f)
+        if (randomSpawnNum < 0.1f && randomSpawnNum > 0f)
         {
-            objectToSpawn = block0;
+            objectToSpawn = blocks[0];
         }
-        else if (randomSpawnNum < 30f && randomSpawnNum > 20f)
+        else if (randomSpawnNum < 0.2f && randomSpawnNum > 0.1f)
         {
-            objectToSpawn = block1;
+            objectToSpawn = blocks[1];
         }
-        else if (randomSpawnNum < 45f && randomSpawnNum > 30f)
+        else if (randomSpawnNum < 20f && randomSpawnNum > 0.2f)
         {
-            objectToSpawn = block2;
+            objectToSpawn = blocks[2];
         }
-        else if (randomSpawnNum < 50f && randomSpawnNum > 45f)
+        else if (randomSpawnNum < 50f && randomSpawnNum > 20f)
         {
-            objectToSpawn = block3;
+            objectToSpawn = blocks[3];
         }
     }
 
     private void zones(GameObject[] zoneArr, int zoneNum)
     {
-        block0 = zoneArr[0];
-        block1 = zoneArr[1];
-        block2 = zoneArr[2];
-        block3 = zoneArr[3];
+        blocks[0] = zoneArr[0];
+        blocks[1] = zoneArr[1];
+        blocks[2] = zoneArr[2];
+        blocks[3] = zoneArr[3];
 
         switch (zoneNum)
         {
@@ -140,6 +137,8 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void selectZone()
     {
+        float changeZoneNum = Random.Range(0f, 30f);
+
         if (changeZoneNum > 0 && changeZoneNum < 10)
         {
             zones(zone1Arr, 1);
@@ -153,10 +152,4 @@ public class ProceduralGeneration : MonoBehaviour
             zones(zone3Arr, 3);
         }
     }
-
-    public static void changeZone()
-    {
-        changeZoneNum = Random.Range(0f, 30f);
-    }
-
 }
