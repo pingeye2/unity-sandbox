@@ -17,14 +17,14 @@ public class ProceduralGeneration : MonoBehaviour
     private GameObject block1;
     private GameObject block2;
     private GameObject block3;
-    private float changeZone;
+    private static float changeZoneNum;
     public GameObject[] zone1Arr;
     public GameObject[] zone2Arr;
     public GameObject[] zone3Arr;
 
     void Start()
     {
-        InvokeRepeating("zoneChangeTimer", 0f, 10f);
+        changeZone();
     }
 
     void Update()
@@ -140,22 +140,23 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void selectZone()
     {
-        if (changeZone > 0 && changeZone < 10)
+        if (changeZoneNum > 0 && changeZoneNum < 10)
         {
             zones(zone1Arr, 1);
         }
-        else if (changeZone > 10 && changeZone < 20)
+        else if (changeZoneNum > 10 && changeZoneNum < 20)
         {
             zones(zone2Arr, 2);
         }
-        else if (changeZone > 20 && changeZone < 30)
+        else if (changeZoneNum > 20 && changeZoneNum < 30)
         {
             zones(zone3Arr, 3);
         }
     }
 
-    private void zoneChangeTimer()
+    public static void changeZone()
     {
-        changeZone = Random.Range(0f, 30f);
+        changeZoneNum = Random.Range(0f, 30f);
     }
+
 }
