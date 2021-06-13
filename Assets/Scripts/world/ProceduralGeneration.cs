@@ -104,11 +104,11 @@ public class ProceduralGeneration : MonoBehaviour
         {
             objectToSpawn = blocks[1];
         }
-        else if (randomSpawnNum < 20f && randomSpawnNum > 0.2f)
+        else if (randomSpawnNum < 0.3f && randomSpawnNum > 0.2f)
         {
             objectToSpawn = blocks[2];
         }
-        else if (randomSpawnNum < 50f && randomSpawnNum > 20f)
+        else if (randomSpawnNum < 50f && randomSpawnNum > 0.3f)
         {
             objectToSpawn = blocks[3];
         }
