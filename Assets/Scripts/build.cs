@@ -14,7 +14,6 @@ public class build : MonoBehaviour
 
     void Update()
     {
-        //build
         if (Input.GetMouseButtonDown(0))
         {
             if (blockCount > 0)
@@ -23,7 +22,6 @@ public class build : MonoBehaviour
                 blockCount--;
             }
         }
-        //delete
         if (Input.GetMouseButtonDown(1))
         {
             ray = camera.ScreenPointToRay(Input.mousePosition);
