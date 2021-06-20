@@ -1,2 +1,5 @@
 # unity-sandbox
-Sandbox environment built with the Unity engine. Including an infinite procedural generated world.  
+
+TODO:
+
+-calculate npc movement to stay within bounds of terrain
