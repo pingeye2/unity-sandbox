@@ -14,9 +14,6 @@ public class ProceduralGeneration : MonoBehaviour
     private GameObject objectToSpawn;
     private bool loadSceneOnStart;
     private GameObject[] blocks = new GameObject[4];
-    [HideInInspector]
-    public int x;
-    public int z;
 
     //when adding new zone create new arr below and amend selectZone()
     public GameObject[] zone1Arr;
@@ -33,9 +30,9 @@ public class ProceduralGeneration : MonoBehaviour
     {
         if (Mathf.Abs(xPlayerMove) >= 1 || Mathf.Abs(zPlayerMove) >= 1 || loadSceneOnStart)
         {
-            for (x = -worldSizeX; x < worldSizeX; x++)
+            for (int x = -worldSizeX; x < worldSizeX; x++)
             {
-                for (z = -worldSizeZ; z < worldSizeZ; z++)
+                for (int z = -worldSizeZ; z < worldSizeZ; z++)
                 {
                     Vector3 pos = new Vector3(x * 1 + xPlayerLocation,
                     generateNoise(x + xPlayerLocation, z + zPlayerLocation, 8f) * noiseHeight,
