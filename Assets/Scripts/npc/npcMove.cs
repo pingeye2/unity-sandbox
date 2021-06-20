@@ -12,7 +12,7 @@ public class npcMove : MonoBehaviour
     public bool shouldNpcAttack;
     public float speed;
     public float howclose;
-
+    private ProceduralGeneration world = new ProceduralGeneration();
 
     void Start()
     {
@@ -47,8 +47,8 @@ public class npcMove : MonoBehaviour
 
     public void RandomPos()
     {
-        x = Random.Range((transform.position.x - 50), (transform.position.x + 50));
-        z = Random.Range((transform.position.z - 50), (transform.position.z + 50));
+        x = Random.Range((world.x - 50), (world.x + 50));
+        z = Random.Range((world.z - 50), (world.z + 50));
         pos = new Vector3(x, 5, z);
     }
 
