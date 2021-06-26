@@ -30,7 +30,7 @@ public class build : MonoBehaviour
                 bc = hit.collider as BoxCollider;
                 if (bc != null)
                 {
-                    Destroy(bc.gameObject);
+                    groundBlocks.moveYBlock(bc.gameObject);
                     blockCount++;
                 }
             }
