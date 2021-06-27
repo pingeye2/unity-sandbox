@@ -5,17 +5,15 @@ using UnityEngine;
 public class ProceduralGeneration : MonoBehaviour
 {
     public GameObject player;
-    private int worldSizeX = 60;
-    private int worldSizeZ = 60;
+    private int worldSizeX = 10;
+    private int worldSizeZ = 10;
     private int noiseHeight = 6;
     private Vector3 startPosition;
-    private Hashtable blockContainer = new Hashtable();
+    public static Hashtable blockContainer = new Hashtable();
     private List<Vector3> blockPositions = new List<Vector3>();
     private GameObject objectToSpawn;
     private bool loadSceneOnStart;
     private GameObject[] blocks = new GameObject[4];
-    [HideInInspector]
-    public Vector3 pos;
 
     //when adding new zone create new arr below and amend selectZone()
     public GameObject[] zone1Arr;
@@ -36,7 +34,7 @@ public class ProceduralGeneration : MonoBehaviour
             {
                 for (int z = -worldSizeZ; z < worldSizeZ; z++)
                 {
-                    pos = new Vector3(x * 1 + xPlayerLocation,
+                    Vector3 pos = new Vector3(x * 1 + xPlayerLocation,
                     generateNoise(x + xPlayerLocation, z + zPlayerLocation, 8f) * noiseHeight,
                     z * 1 + zPlayerLocation);
 

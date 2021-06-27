@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// add to npcs so if they fall of the world they get destroyed
 public class destroyGameObj : MonoBehaviour
 {
     private Transform target;
     private float dist;
-    private float howclose = 1000f;
+    private float howclose = 20f;
 
     void Start()
     {
@@ -20,7 +19,7 @@ public class destroyGameObj : MonoBehaviour
 
         if (dist > howclose)
         {
-            Debug.Log("gone");
+            ProceduralGeneration.blockContainer.Remove(transform.position);
             Destroy(gameObject);
         }
 
