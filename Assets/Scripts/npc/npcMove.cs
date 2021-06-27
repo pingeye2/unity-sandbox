@@ -13,11 +13,10 @@ public class npcMove : MonoBehaviour
     public float speed;
     public float howclose;
 
-
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("RandomPos", 0f, 5f);
+        InvokeRepeating("RandomPos", 3f, 5f);
     }
 
     void Update()
@@ -47,9 +46,9 @@ public class npcMove : MonoBehaviour
 
     public void RandomPos()
     {
-        x = Random.Range((transform.position.x - 50), (transform.position.x + 50));
-        z = Random.Range((transform.position.z - 50), (transform.position.z + 50));
+        x = Random.Range((transform.position.x - 30), (transform.position.x + 30));
+        z = Random.Range((transform.position.z - 30), (transform.position.z + 30));
+
         pos = new Vector3(x, 5, z);
     }
-
 }
