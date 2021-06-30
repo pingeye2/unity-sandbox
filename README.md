@@ -3,3 +3,4 @@
 TODO:
 
 -y axis block generation
+-npc powers
