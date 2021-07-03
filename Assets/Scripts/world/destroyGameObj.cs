@@ -6,7 +6,7 @@ public class destroyGameObj : MonoBehaviour
 {
     private Transform target;
     private float dist;
-    private float howclose = 20f;
+    private float howclose = 80f;
 
     void Start()
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 public class ProceduralGeneration : MonoBehaviour
 {
     public GameObject player;
-    private int worldSizeX = 10;
-    private int worldSizeZ = 10;
+    private int worldSizeX = 40;
+    private int worldSizeZ = 40;
     private int noiseHeight = 6;
     private Vector3 startPosition;
     public static Hashtable blockContainer = new Hashtable();
