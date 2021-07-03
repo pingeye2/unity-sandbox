@@ -7,13 +7,14 @@ public class ProceduralGeneration : MonoBehaviour
     public GameObject player;
     private int worldSizeX = 40;
     private int worldSizeZ = 40;
-    private int noiseHeight = 6;
+    private int noiseHeight = 4;
     private Vector3 startPosition;
     public static Hashtable blockContainer = new Hashtable();
     private List<Vector3> blockPositions = new List<Vector3>();
     private GameObject objectToSpawn;
-    private bool loadSceneOnStart;
+    private bool loadSceneOnStart = true;
     private GameObject[] blocks = new GameObject[4];
+    private Vector3 startPos;
 
     //when adding new zone create new arr below and amend selectZone()
     public GameObject[] zone1Arr;
@@ -22,12 +23,13 @@ public class ProceduralGeneration : MonoBehaviour
 
     void Start()
     {
+        startPos = player.transform.position;
         selectZone();
-        loadSceneOnStart = true;
     }
 
     void Update()
     {
+        measurePlayerDis();
         if (Mathf.Abs(xPlayerMove) >= 1 || Mathf.Abs(zPlayerMove) >= 1 || loadSceneOnStart)
         {
             for (int x = -worldSizeX; x < worldSizeX; x++)
@@ -66,6 +68,16 @@ public class ProceduralGeneration : MonoBehaviour
         get
         {
             return (int)(player.transform.position.z - startPosition.z);
+        }
+    }
+
+    public void measurePlayerDis()
+    {
+        if (player.transform.position.z > startPos.z + 100 || player.transform.position.x > startPos.x + 100)
+        {
+            Debug.Log("change zone now");
+            selectZone();
+            startPos = player.transform.position;
         }
     }
 
@@ -114,25 +126,12 @@ public class ProceduralGeneration : MonoBehaviour
         }
     }
 
-    private void zones(GameObject[] zoneArr, int zoneNum)
+    private void zones(GameObject[] zoneArr)
     {
         blocks[0] = zoneArr[0];
         blocks[1] = zoneArr[1];
         blocks[2] = zoneArr[2];
         blocks[3] = zoneArr[3];
-
-        switch (zoneNum)
-        {
-            case 1:
-                noiseHeight = 5;
-                break;
-            case 2:
-                noiseHeight = 10;
-                break;
-            case 3:
-                noiseHeight = 2;
-                break;
-        }
     }
 
     private void selectZone()
@@ -141,15 +140,15 @@ public class ProceduralGeneration : MonoBehaviour
 
         if (changeZoneNum > 0 && changeZoneNum < 10)
         {
-            zones(zone1Arr, 1);
+            zones(zone1Arr);
         }
         else if (changeZoneNum > 10 && changeZoneNum < 20)
         {
-            zones(zone2Arr, 2);
+            zones(zone2Arr);
         }
         else if (changeZoneNum > 20 && changeZoneNum < 30)
         {
-            zones(zone3Arr, 3);
+            zones(zone3Arr);
         }
     }
 }

@@ -16,7 +16,7 @@ public class npcMove : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("RandomPos", 3f, 5f);
+        InvokeRepeating("RandomPos", 2f, 5f);
     }
 
     void Update()
