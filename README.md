@@ -1,6 +1,7 @@
 # unity-sandbox
 
+NOTE: no game art is included in this repo
+
 TODO:
 
--y axis block generation
--npc powers
+- zone switching on in negative axis

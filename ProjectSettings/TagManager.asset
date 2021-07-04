@@ -4,10 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - zone1_block1
-  - zone1_block2
-  - zone1_block3
-  - zone1_block4
+  - build_block
   layers:
   - Default
   - TransparentFX
