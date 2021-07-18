@@ -15,8 +15,10 @@ public class gameObjController : MonoBehaviour
     private float dist;
     private Text blockCountUI;
     private List<GameObject> collectedObjects = new List<GameObject>();
+    private Transform backpackPos;
     void Start()
     {
+        backpackPos = GameObject.FindGameObjectWithTag("backpack").GetComponent<Transform>();
         blockCountUI = GameObject.Find("blockCountUI").GetComponent<Text>();
     }
 
@@ -42,7 +44,7 @@ public class gameObjController : MonoBehaviour
 
                     if (dist <= howclose)
                     {
-                        GameObject collectedObj = Instantiate(bc.gameObject, new Vector3(0, 0, 0), buildPos.rotation);
+                        GameObject collectedObj = Instantiate(bc.gameObject, backpackPos.position, backpackPos.rotation);
                         collectedObjects.Add(collectedObj);
                         Destroy(bc.gameObject);
                     }

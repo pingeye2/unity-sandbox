@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - build_block
+  - zone1_block1
+  - backpack
   layers:
   - Default
   - TransparentFX
