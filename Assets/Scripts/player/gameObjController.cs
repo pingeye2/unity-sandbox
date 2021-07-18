@@ -24,7 +24,7 @@ public class gameObjController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (blockCount > 0)
+            if (collectedObjects.Count > 0)
             {
                 Instantiate(collectedObjects[0], buildPos.position, buildPos.rotation);
                 collectedObjects.RemoveAt(0);
