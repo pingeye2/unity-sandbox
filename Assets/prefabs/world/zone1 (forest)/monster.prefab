@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 1172105982167189914}
   - component: {fileID: 3753878514093358272}
   m_Layer: 0
-  m_Name: npc_cube
+  m_Name: monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
