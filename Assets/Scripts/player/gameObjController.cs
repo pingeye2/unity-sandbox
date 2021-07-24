@@ -16,6 +16,7 @@ public class gameObjController : MonoBehaviour
     private Text blockCountUI;
     private List<GameObject> collectedObjects = new List<GameObject>();
     private Transform backpackPos;
+
     void Start()
     {
         backpackPos = GameObject.FindGameObjectWithTag("backpack").GetComponent<Transform>();
@@ -28,7 +29,10 @@ public class gameObjController : MonoBehaviour
         {
             if (collectedObjects.Count > 0)
             {
-                Instantiate(collectedObjects[0], buildPos.position, buildPos.rotation);
+                GameObject projectile = Instantiate(collectedObjects[0], buildPos.position, buildPos.rotation);
+                projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 8000);
+                Destroy(projectile.GetComponent<backpackFollow>());
+                Destroy(collectedObjects[0]);
                 collectedObjects.RemoveAt(0);
             }
         }
@@ -38,13 +42,15 @@ public class gameObjController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 bc = hit.collider as BoxCollider;
-                if (bc != null)
+
+                if (bc != null && bc.gameObject.GetComponent<Rigidbody>() != null)
                 {
                     dist = Vector3.Distance(transform.position, bc.gameObject.transform.position);
 
                     if (dist <= howclose)
                     {
                         GameObject collectedObj = Instantiate(bc.gameObject, backpackPos.position, backpackPos.rotation);
+                        collectedObj.AddComponent<backpackFollow>();
                         collectedObjects.Add(collectedObj);
                         Destroy(bc.gameObject);
                     }
