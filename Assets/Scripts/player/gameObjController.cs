@@ -14,12 +14,10 @@ public class gameObjController : MonoBehaviour
     private float howclose = 10;
     private float dist;
     private Text blockCountUI;
-    private List<GameObject> collectedObjects = new List<GameObject>();
-    private Transform backpackPos;
+    private List<string> collectedObjects = new List<string>();
 
     void Start()
     {
-        backpackPos = GameObject.FindGameObjectWithTag("backpack").GetComponent<Transform>();
         blockCountUI = GameObject.Find("blockCountUI").GetComponent<Text>();
     }
 
@@ -29,10 +27,9 @@ public class gameObjController : MonoBehaviour
         {
             if (collectedObjects.Count > 0)
             {
-                GameObject projectile = Instantiate(collectedObjects[0], buildPos.position, buildPos.rotation);
+                GameObject x = Resources.Load<GameObject>("prefabs/" + getPrefabName(collectedObjects[0]));
+                GameObject projectile = Instantiate(x, buildPos.position, buildPos.rotation);
                 projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
-                Destroy(projectile.GetComponent<backpackFollow>());
-                Destroy(collectedObjects[0]);
                 collectedObjects.RemoveAt(0);
             }
         }
@@ -49,9 +46,7 @@ public class gameObjController : MonoBehaviour
 
                     if (dist <= howclose)
                     {
-                        GameObject collectedObj = Instantiate(bc.gameObject, backpackPos.position, backpackPos.rotation);
-                        collectedObj.AddComponent<backpackFollow>();
-                        collectedObjects.Add(collectedObj);
+                        collectedObjects.Add(bc.gameObject.name);
                         Destroy(bc.gameObject);
                     }
                 }
@@ -59,5 +54,11 @@ public class gameObjController : MonoBehaviour
         }
         blockCountUI.text = collectedObjects.Count.ToString();
 
+    }
+
+    private string getPrefabName(string name)
+    {
+        int howManyChars = name.IndexOf("#") + 1;
+        return name.Substring(0, howManyChars);
     }
 }
