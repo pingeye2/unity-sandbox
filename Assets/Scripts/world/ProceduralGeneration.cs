@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ProceduralGeneration : MonoBehaviour
 {
@@ -73,9 +74,11 @@ public class ProceduralGeneration : MonoBehaviour
 
     public void measurePlayerDis()
     {
-        if (player.transform.position.z > startPos.z + 100 || player.transform.position.x > startPos.x + 100)
+        float distTravalledX = Math.Abs(player.transform.position.x - startPos.x);
+        float distTravalledZ = Math.Abs(player.transform.position.z - startPos.z);
+
+        if (Math.Round(distTravalledX) > 100 || Math.Round(distTravalledZ) > 100)
         {
-            Debug.Log("change zone now");
             selectZone();
             startPos = player.transform.position;
         }
@@ -114,7 +117,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void selectZone()
     {
-        float changeZoneNum = Random.Range(0f, 30f);
+        float changeZoneNum = UnityEngine.Random.Range(0f, 30f);
 
         if (changeZoneNum > 0 && changeZoneNum < 10)
         {
@@ -132,7 +135,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void selectBlocks()
     {
-        float randomSpawnNum = Random.Range(0f, 50f);
+        float randomSpawnNum = UnityEngine.Random.Range(0f, 50f);
 
         // very rare
         if (randomSpawnNum < 0.001f && randomSpawnNum > 0f)

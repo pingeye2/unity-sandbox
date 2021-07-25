@@ -30,7 +30,7 @@ public class gameObjController : MonoBehaviour
             if (collectedObjects.Count > 0)
             {
                 GameObject projectile = Instantiate(collectedObjects[0], buildPos.position, buildPos.rotation);
-                projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 8000);
+                projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 8000);
                 Destroy(projectile.GetComponent<backpackFollow>());
                 Destroy(collectedObjects[0]);
                 collectedObjects.RemoveAt(0);
