@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gameObjController : MonoBehaviour
+public class inventoryController : MonoBehaviour
 {
     public Transform buildPos;
     public GameObject buildObj;
@@ -27,7 +27,7 @@ public class gameObjController : MonoBehaviour
         {
             if (collectedObjects.Count > 0)
             {
-                GameObject x = Resources.Load<GameObject>("prefabs/" + getPrefabName(collectedObjects[0]));
+                GameObject x = Resources.Load<GameObject>("collectables/" + getPrefabName(collectedObjects[0]));
                 GameObject projectile = Instantiate(x, buildPos.position, buildPos.rotation);
                 projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
                 collectedObjects.RemoveAt(0);

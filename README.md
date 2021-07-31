@@ -4,9 +4,9 @@ NOTE: no game art is included in this repo
 
 TODO:
 
-- backpack
+- backpack in inventoryController
 - force controller
 
 Project conventions:
 
-- All prefabs that are to be instainated are named with a # and the end.
+- All collectables are named with a # and the end.

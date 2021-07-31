@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: implement into worldController
 public class destroyGameObj : MonoBehaviour
 {
     private Transform target;
@@ -19,7 +20,7 @@ public class destroyGameObj : MonoBehaviour
 
         if (dist > howclose)
         {
-            ProceduralGeneration.blockContainer.Remove(transform.position);
+            worldController.blockContainer.Remove(transform.position);
             Destroy(gameObject);
         }
 

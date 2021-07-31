@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class ProceduralGeneration : MonoBehaviour
+public class worldController : MonoBehaviour
 {
     public GameObject player;
     private int worldSizeX = 40;
