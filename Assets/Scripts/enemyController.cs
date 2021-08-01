@@ -29,6 +29,7 @@ public class enemyController : MonoBehaviour
         {
             collectItems(transform.position, 10);
         }
+        transform.LookAt(pos);
         transform.position = Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime);
     }
 
@@ -60,7 +61,6 @@ public class enemyController : MonoBehaviour
             {
                 pos = hitCollider.transform.position;
                 float distToPos = Vector3.Distance(pos, transform.position);
-                transform.LookAt(pos);
                 if (distToPos < 3)
                 {
                     enemyBackpack.Add(hitCollider.gameObject.name);
