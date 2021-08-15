@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class inventoryController : MonoBehaviour
 {
     public Transform buildPos;
-    public GameObject buildObj;
     public Camera camera;
     private Ray ray;
     private RaycastHit hit;
@@ -27,7 +26,7 @@ public class inventoryController : MonoBehaviour
         {
             if (collectedObjects.Count > 0)
             {
-                GameObject x = Resources.Load<GameObject>("collectables/" + getPrefabName(collectedObjects[0]));
+                GameObject x = Resources.Load<GameObject>("collectables/" + helpers.getPrefabName(collectedObjects[0]));
                 GameObject projectile = Instantiate(x, buildPos.position, buildPos.rotation);
                 projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
                 collectedObjects.RemoveAt(0);
@@ -56,9 +55,4 @@ public class inventoryController : MonoBehaviour
 
     }
 
-    private string getPrefabName(string name)
-    {
-        int howManyChars = name.IndexOf("#") + 1;
-        return name.Substring(0, howManyChars);
-    }
 }

@@ -10,6 +10,7 @@ public class enemyController : MonoBehaviour
     public float speed;
     public float howclose;
     private List<string> enemyBackpack = new List<string>();
+    public Transform firePos;
 
     void Start()
     {
@@ -36,11 +37,26 @@ public class enemyController : MonoBehaviour
     // enemy moves towards the player if set to attack and within dist
     public void attack()
     {
-        if (Vector3.Distance(transform.position, target.position) > 3)
+        if (Vector3.Distance(transform.position, target.position) > 10)
         {
             pos = target.position;
         }
+        else
+        {
+            if (enemyBackpack.Count > 0)
+            {
+                GameObject x = Resources.Load<GameObject>("collectables/" + helpers.getPrefabName(enemyBackpack[0]));
+                GameObject projectile = Instantiate(x, firePos.position, firePos.rotation);
+                projectile.GetComponent<Rigidbody>().AddRelativeForce(target.forward * 4000);
+                enemyBackpack.RemoveAt(0);
+            }
+            else
+            {
+                pos = transform.position - target.position;
+            }
+        }
     }
+
 
     // generates a random pos for the enemy to move towards
     public void randomPos()
