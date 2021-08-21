@@ -15,8 +15,6 @@ public class enemyController : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        // finds a new pos every 10 seconds
-        InvokeRepeating("randomPos", 2f, 10f);
     }
 
     void Update()
@@ -29,6 +27,10 @@ public class enemyController : MonoBehaviour
         else if (enemyBackpack.Count < 20)
         {
             collectItems(transform.position, 10);
+        }
+        if (Vector3.Distance(transform.position, pos) < 2)
+        {
+            randomPos();
         }
         transform.LookAt(pos);
         transform.position = Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime);
@@ -45,8 +47,8 @@ public class enemyController : MonoBehaviour
         {
             if (enemyBackpack.Count > 0)
             {
-                GameObject x = Resources.Load<GameObject>("collectables/" + helpers.getPrefabName(enemyBackpack[0]));
-                GameObject projectile = Instantiate(x, firePos.position, firePos.rotation);
+                GameObject prefabInstance = Resources.Load<GameObject>("collectables/" + helpers.getPrefabName(enemyBackpack[0]));
+                GameObject projectile = Instantiate(prefabInstance, firePos.position, firePos.rotation);
                 projectile.GetComponent<Rigidbody>().AddRelativeForce(target.forward * 4000);
                 enemyBackpack.RemoveAt(0);
             }
