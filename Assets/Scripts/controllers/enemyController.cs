@@ -12,6 +12,7 @@ public class enemyController : MonoBehaviour
     private List<string> enemyBackpack = new List<string>();
     public Transform firePos;
     public float health;
+    public GameObject itemToDrop;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class enemyController : MonoBehaviour
         if (health < 0)
         {
             Destroy(gameObject);
+            dropItems(100);
         }
         dist = Vector3.Distance(target.position, transform.position);
         if (dist <= howclose)
@@ -110,6 +112,14 @@ public class enemyController : MonoBehaviour
         else if (collision.relativeVelocity.magnitude > 20)
         {
             health -= 10;
+        }
+    }
+
+    public void dropItems(int dropAmount)
+    {
+        for (int i = 0; i < dropAmount; i++)
+        {
+            Instantiate(itemToDrop, transform.position, transform.rotation);
         }
     }
 
