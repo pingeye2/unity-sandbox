@@ -11,6 +11,7 @@ public class enemyController : MonoBehaviour
     public float howclose;
     private List<string> enemyBackpack = new List<string>();
     public Transform firePos;
+    public float health;
 
     void Start()
     {
@@ -19,6 +20,10 @@ public class enemyController : MonoBehaviour
 
     void Update()
     {
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
         dist = Vector3.Distance(target.position, transform.position);
         if (dist <= howclose)
         {
@@ -85,6 +90,26 @@ public class enemyController : MonoBehaviour
                     Destroy(hitCollider.gameObject);
                 }
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude > 100)
+        {
+            health -= 50;
+        }
+        else if (collision.relativeVelocity.magnitude > 60)
+        {
+            health -= 30;
+        }
+        else if (collision.relativeVelocity.magnitude > 40)
+        {
+            health -= 20;
+        }
+        else if (collision.relativeVelocity.magnitude > 20)
+        {
+            health -= 10;
         }
     }
 

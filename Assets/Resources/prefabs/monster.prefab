@@ -161,6 +161,7 @@ MonoBehaviour:
   speed: 10
   howclose: 20
   firePos: {fileID: 3680411066085055249}
+  health: 50
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0
