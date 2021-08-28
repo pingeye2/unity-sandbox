@@ -10,9 +10,10 @@ public class enemyController : MonoBehaviour
     public float speed;
     public float howclose;
     public float health;
-    public GameObject itemToDrop;
+    public Transform firePos;
+    public GameObject associatedObj;
 
-    // powers (set in the engine)
+    // powers (set in engine)
     public bool collect;
     public bool shoot;
 
@@ -81,7 +82,7 @@ public class enemyController : MonoBehaviour
     {
         for (int i = 0; i < dropAmount; i++)
         {
-            Instantiate(itemToDrop, transform.position, transform.rotation);
+            Instantiate(associatedObj, transform.position, transform.rotation);
         }
     }
 
@@ -90,7 +91,7 @@ public class enemyController : MonoBehaviour
     {
         if (shoot)
         {
-            shootPlayer();
+            StartCoroutine(powerShoot()); ;
         }
     }
 
@@ -98,14 +99,14 @@ public class enemyController : MonoBehaviour
     {
         if (collect)
         {
-            collectItems(transform.position, 10);
+            powerCollect(transform.position, 10);
         }
     }
 
     /********** power: collect ***********/
 
     // finds any items with rigidbodies within a set radius and removes them from the world
-    void collectItems(Vector3 center, float radius)
+    void powerCollect(Vector3 center, float radius)
     {
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
 
@@ -125,12 +126,21 @@ public class enemyController : MonoBehaviour
 
     /********** power: shoot ***********/
 
-    void shootPlayer()
+    private bool canShoot;
+    IEnumerator powerShoot()
     {
-        pos = target.position;
+        if (dist <= 5)
+        {
+            pos = transform.position;
+            transform.LookAt(target.position);
+            GameObject projectile = Instantiate(associatedObj, firePos.position, firePos.rotation);
+            projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
+            yield return new WaitForSeconds(5);
+        }
+        else
+        {
+            pos = target.position;
+        }
     }
-
-
-
 
 }
