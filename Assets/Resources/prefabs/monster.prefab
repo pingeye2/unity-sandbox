@@ -160,9 +160,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   howclose: 20
-  firePos: {fileID: 3680411066085055249}
   health: 50
   itemToDrop: {fileID: 8768489124556868421, guid: 7e6a511cfd6c7da4098f90d3a023fd1f, type: 3}
+  collect: 1
+  shoot: 1
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0
