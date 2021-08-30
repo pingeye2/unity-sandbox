@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: implement into worldController
 public class destroyGameObj : MonoBehaviour
 {
     private Transform target;

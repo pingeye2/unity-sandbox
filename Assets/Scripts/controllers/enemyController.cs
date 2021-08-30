@@ -91,7 +91,7 @@ public class enemyController : MonoBehaviour
     {
         if (shoot)
         {
-            StartCoroutine(powerShoot()); ;
+            powerShoot();
         }
     }
 
@@ -126,21 +126,29 @@ public class enemyController : MonoBehaviour
 
     /********** power: shoot ***********/
 
-    private bool canShoot;
-    IEnumerator powerShoot()
+    private bool canShoot = true;
+    void powerShoot()
     {
         if (dist <= 5)
         {
             pos = transform.position;
             transform.LookAt(target.position);
-            GameObject projectile = Instantiate(associatedObj, firePos.position, firePos.rotation);
-            projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
-            yield return new WaitForSeconds(5);
+            if (canShoot)
+            {
+                StartCoroutine(powerShootDelay());
+            }
         }
         else
         {
             pos = target.position;
         }
     }
-
+    IEnumerator powerShootDelay()
+    {
+        GameObject projectile = Instantiate(associatedObj, firePos.position, firePos.rotation);
+        projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 2000);
+        canShoot = false;
+        yield return new WaitForSeconds(2);
+        canShoot = true;
+    }
 }

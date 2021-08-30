@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class inventoryController : MonoBehaviour
+public class playerController : MonoBehaviour
 {
     public Transform buildPos;
     public Camera camera;
@@ -26,7 +26,7 @@ public class inventoryController : MonoBehaviour
         {
             if (collectedObjects.Count > 0)
             {
-                GameObject x = Resources.Load<GameObject>("collectables/" + helpers.getPrefabName(collectedObjects[0]));
+                GameObject x = Resources.Load<GameObject>("collectables/" + getPrefabName(collectedObjects[0]));
                 GameObject projectile = Instantiate(x, buildPos.position, buildPos.rotation);
                 projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 4000);
                 collectedObjects.RemoveAt(0);
@@ -52,7 +52,12 @@ public class inventoryController : MonoBehaviour
             }
         }
         blockCountUI.text = collectedObjects.Count.ToString();
+    }
 
+    string getPrefabName(string name)
+    {
+        int howManyChars = name.IndexOf("#") + 1;
+        return name.Substring(0, howManyChars);
     }
 
 }
