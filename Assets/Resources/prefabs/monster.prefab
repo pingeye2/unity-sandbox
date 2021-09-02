@@ -165,6 +165,8 @@ MonoBehaviour:
   associatedObj: {fileID: 8768489124556868421, guid: 7e6a511cfd6c7da4098f90d3a023fd1f, type: 3}
   collect: 1
   shoot: 1
+  shootDelay: 5
+  shootRange: 5
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0

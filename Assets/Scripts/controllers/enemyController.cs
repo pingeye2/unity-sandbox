@@ -127,9 +127,11 @@ public class enemyController : MonoBehaviour
     /********** power: shoot ***********/
 
     private bool canShoot = true;
+    public float shootDelay;
+    public float shootRange;
     void powerShoot()
     {
-        if (dist <= 5)
+        if (dist <= shootRange)
         {
             pos = transform.position;
             transform.LookAt(target.position);
@@ -148,7 +150,7 @@ public class enemyController : MonoBehaviour
         GameObject projectile = Instantiate(associatedObj, firePos.position, firePos.rotation);
         projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 2000);
         canShoot = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(shootDelay);
         canShoot = true;
     }
 }

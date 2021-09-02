@@ -9,4 +9,3 @@ Project conventions:
 TODO:
 
 - inventoryController -> backpack
-- enemyController -> shoot delay
