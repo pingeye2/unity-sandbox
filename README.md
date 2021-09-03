@@ -9,3 +9,4 @@ Project conventions:
 TODO:
 
 - inventoryController -> backpack
+- npcController -> random characteristics

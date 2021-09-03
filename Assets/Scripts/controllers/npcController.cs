@@ -2,37 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyController : MonoBehaviour
+/*  npcController -> all characteristics of the npc's are randomly selected on initialization  */
+public class npcController : MonoBehaviour
 {
     private Vector3 pos;
     private float dist;
     private Transform target;
+    private string inRangePower;
+    private string outRangePower;
     public float speed;
     public float howclose;
     public float health;
     public Transform firePos;
     public GameObject associatedObj;
 
-    // powers (set in engine)
-    public bool collect;
-    public bool shoot;
-
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         InvokeRepeating("randomPos", 2f, 5f);
+        selectPowers();
+
     }
 
     void Update()
     {
         dist = Vector3.Distance(target.position, transform.position);
-        // destroy enemy and drop loot
+        // destroy npc and drop loot
         if (health < 0)
         {
             Destroy(gameObject);
             dropItems(100);
         }
-        // what the enemy does if the player is in range
+        // what the npc does if the player is in range
         if (dist <= howclose)
         {
             inRangeManager();
@@ -48,7 +49,7 @@ public class enemyController : MonoBehaviour
 
     /********** core methods ***********/
 
-    // generates a random pos for the enemy to move towards
+    // generates a random pos for the npc to move towards
     void randomPos()
     {
         float x = Random.Range((transform.position.x - 30), (transform.position.x + 30));
@@ -56,7 +57,7 @@ public class enemyController : MonoBehaviour
         pos = new Vector3(x, 5, z);
     }
 
-    // takes down enemy's health based on the force a object hits them
+    // takes down npc's health based on the force a object hits them
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 100)
@@ -86,10 +87,20 @@ public class enemyController : MonoBehaviour
         }
     }
 
-    // determines what the enemy does based on bools set in the engine
+    // randomly selects what powers the npc has
+    void selectPowers()
+    {
+        float rand = Random.Range(0, 2);
+        if (rand == 1)
+        {
+            inRangePower = "shoot";
+            outRangePower = "collect";
+        }
+    }
+
     void inRangeManager()
     {
-        if (shoot)
+        if (inRangePower == "shoot")
         {
             powerShoot();
         }
@@ -97,7 +108,7 @@ public class enemyController : MonoBehaviour
 
     void outRangeManager()
     {
-        if (collect)
+        if (outRangePower == "collect")
         {
             powerCollect(transform.position, 10);
         }
