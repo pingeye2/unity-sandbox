@@ -158,15 +158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fadd1f38181f83744a0eeaf0f0001a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  howclose: 20
-  health: 50
   firePos: {fileID: 3680411066085055249}
-  associatedObj: {fileID: 8768489124556868421, guid: 7e6a511cfd6c7da4098f90d3a023fd1f, type: 3}
-  collect: 1
-  shoot: 1
-  shootDelay: 5
-  shootRange: 5
+  possibleObjArr:
+  - {fileID: 8768489124556868421, guid: 7e6a511cfd6c7da4098f90d3a023fd1f, type: 3}
+  - {fileID: 7112553609321472585, guid: f2421edf82ac5074ea7f0202bdfde429, type: 3}
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0

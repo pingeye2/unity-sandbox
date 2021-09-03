@@ -5,23 +5,24 @@ using UnityEngine;
 /*  npcController -> all characteristics of the npc's are randomly selected on initialization  */
 public class npcController : MonoBehaviour
 {
-    private Vector3 pos;
-    private float dist;
-    private Transform target;
-    private string inRangePower;
-    private string outRangePower;
-    public float speed;
-    public float howclose;
-    public float health;
     public Transform firePos;
-    public GameObject associatedObj;
+    public GameObject[] possibleObjArr;
+
+    Vector3 pos;
+    float dist;
+    Transform target;
+    string inRangePower;
+    string outRangePower;
+    float speed;
+    float howclose;
+    float health;
+    GameObject associatedObj;
 
     void Start()
     {
+        selectCharacteristics();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         InvokeRepeating("randomPos", 2f, 5f);
-        selectPowers();
-
     }
 
     void Update()
@@ -57,6 +58,30 @@ public class npcController : MonoBehaviour
         pos = new Vector3(x, 5, z);
     }
 
+    // add to functions else if statement to create more variations of npc's
+    void selectCharacteristics()
+    {
+        float rand = Random.Range(0, 2);
+        if (rand == 1)
+        {
+            inRangePower = "shoot";
+            outRangePower = "collect";
+            health = 100;
+            speed = 10;
+            howclose = 10;
+        }
+        else
+        {
+            health = 100;
+            speed = 10;
+            howclose = 10;
+        }
+
+        int randObjIndex = Random.Range(0, possibleObjArr.Length);
+        associatedObj = possibleObjArr[randObjIndex];
+
+    }
+
     // takes down npc's health based on the force a object hits them
     void OnCollisionEnter(Collision collision)
     {
@@ -84,17 +109,6 @@ public class npcController : MonoBehaviour
         for (int i = 0; i < dropAmount; i++)
         {
             Instantiate(associatedObj, transform.position, transform.rotation);
-        }
-    }
-
-    // randomly selects what powers the npc has
-    void selectPowers()
-    {
-        float rand = Random.Range(0, 2);
-        if (rand == 1)
-        {
-            inRangePower = "shoot";
-            outRangePower = "collect";
         }
     }
 
@@ -137,18 +151,20 @@ public class npcController : MonoBehaviour
 
     /********** power: shoot ***********/
 
-    private bool canShoot = true;
-    public float shootDelay;
-    public float shootRange;
+    bool canShoot = true;
     void powerShoot()
     {
+        float shootDelay = Random.Range(1, 10);
+        float shootRange = Random.Range(10, 40);
+        float shootPower = Random.Range(1000, 4000);
+
         if (dist <= shootRange)
         {
             pos = transform.position;
             transform.LookAt(target.position);
             if (canShoot)
             {
-                StartCoroutine(powerShootDelay());
+                StartCoroutine(powerShootDelay(shootDelay, shootPower));
             }
         }
         else
@@ -156,10 +172,10 @@ public class npcController : MonoBehaviour
             pos = target.position;
         }
     }
-    IEnumerator powerShootDelay()
+    IEnumerator powerShootDelay(float shootDelay, float shootPower)
     {
         GameObject projectile = Instantiate(associatedObj, firePos.position, firePos.rotation);
-        projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 2000);
+        projectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shootPower);
         canShoot = false;
         yield return new WaitForSeconds(shootDelay);
         canShoot = true;
