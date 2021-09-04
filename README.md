@@ -9,4 +9,4 @@ Project conventions:
 TODO:
 
 - inventoryController -> backpack
-- npcController -> random characteristics
+- npcController -> change mesh dynamically
