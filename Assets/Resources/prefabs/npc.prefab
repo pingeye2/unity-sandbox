@@ -74,7 +74,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172105981561211481}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1172105981561211482
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -162,6 +162,10 @@ MonoBehaviour:
   possibleObjArr:
   - {fileID: 8768489124556868421, guid: 7e6a511cfd6c7da4098f90d3a023fd1f, type: 3}
   - {fileID: 7112553609321472585, guid: f2421edf82ac5074ea7f0202bdfde429, type: 3}
+  meshes:
+  - {fileID: 4300000, guid: d7ad634caa1c049d49b730cc6d29c683, type: 3}
+  - {fileID: 4300000, guid: 1e50ef3048667495d90210b70c070c6b, type: 3}
+  - {fileID: 4300000, guid: 186ad8f063dbf430da4d56ebc0cb14e0, type: 3}
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +192,7 @@ GameObject:
   - component: {fileID: 1172105982167189914}
   - component: {fileID: 3753878514093358272}
   m_Layer: 0
-  m_Name: monster
+  m_Name: npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

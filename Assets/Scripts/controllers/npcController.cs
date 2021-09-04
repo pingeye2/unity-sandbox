@@ -7,9 +7,11 @@ public class npcController : MonoBehaviour
 {
     public Transform firePos;
     public GameObject[] possibleObjArr;
+    public Mesh[] meshes;
 
     Vector3 pos;
-    float dist;
+    float distToPlayer;
+    float distToPos;
     Transform target;
     string npcPower;
     float speed;
@@ -27,14 +29,20 @@ public class npcController : MonoBehaviour
 
     void Update()
     {
-        dist = Vector3.Distance(target.position, transform.position);
+        distToPlayer = Vector3.Distance(target.position, transform.position);
+        // if npc has reached its pos generate a new one
+        distToPos = Vector3.Distance(pos, transform.position);
+        if (distToPos < 5)
+        {
+            randomPos();
+        }
         // destroy npc and drop loot
         if (health < 0)
         {
             Destroy(gameObject);
             dropItems(100);
         }
-        if (dist <= howclose && shouldAttack)
+        if (distToPlayer <= howclose && shouldAttack)
         {
             threatNpcPowerManager();
         }
@@ -42,7 +50,6 @@ public class npcController : MonoBehaviour
         {
             harmlessNpcPowerManager();
         }
-
         transform.LookAt(pos);
         transform.position = Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime);
     }
@@ -60,6 +67,8 @@ public class npcController : MonoBehaviour
     // add to else if statement to create more variations of npc's
     void selectCharacteristics()
     {
+        GetComponent<MeshFilter>().mesh = meshes[Random.Range(0, meshes.Length)];
+        associatedObj = possibleObjArr[Random.Range(0, possibleObjArr.Length)];
         float rand = Random.Range(0, 5);
         if (rand == 1)
         {
@@ -78,13 +87,11 @@ public class npcController : MonoBehaviour
         }
         else
         {
+            npcPower = "collect";
             health = 100;
             speed = 10;
             howclose = 10;
         }
-
-        int randObjIndex = Random.Range(0, possibleObjArr.Length);
-        associatedObj = possibleObjArr[randObjIndex];
     }
 
     // takes down npc's health based on the force a object hits them
@@ -151,7 +158,7 @@ public class npcController : MonoBehaviour
             if (hitCollider.GetComponent<Rigidbody>() != null && hitCollider.name != this.name && hitCollider.tag != "Player")
             {
                 pos = hitCollider.transform.position;
-                float distToPos = Vector3.Distance(pos, transform.position);
+                distToPos = Vector3.Distance(pos, transform.position);
                 if (distToPos < 3)
                 {
                     Destroy(hitCollider.gameObject);
@@ -165,11 +172,11 @@ public class npcController : MonoBehaviour
     bool canShoot = true;
     void powerShoot()
     {
-        float shootDelay = Random.Range(1, 10);
-        float shootRange = Random.Range(10, 40);
+        float shootDelay = Random.Range(1, 5);
         float shootPower = Random.Range(1000, 4000);
+        float shootRange = 10;
 
-        if (dist <= shootRange)
+        if (distToPlayer <= shootRange)
         {
             pos = transform.position;
             transform.LookAt(target.position);
