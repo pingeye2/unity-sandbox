@@ -11,11 +11,11 @@ public class npcController : MonoBehaviour
     Vector3 pos;
     float dist;
     Transform target;
-    string inRangePower;
-    string outRangePower;
+    string npcPower;
     float speed;
     float howclose;
     float health;
+    bool shouldAttack;
     GameObject associatedObj;
 
     void Start()
@@ -34,14 +34,13 @@ public class npcController : MonoBehaviour
             Destroy(gameObject);
             dropItems(100);
         }
-        // what the npc does if the player is in range
-        if (dist <= howclose)
+        if (dist <= howclose && shouldAttack)
         {
-            inRangeManager();
+            threatNpcPowerManager();
         }
-        else
+        else if (!shouldAttack)
         {
-            outRangeManager();
+            harmlessNpcPowerManager();
         }
 
         transform.LookAt(pos);
@@ -58,14 +57,21 @@ public class npcController : MonoBehaviour
         pos = new Vector3(x, 5, z);
     }
 
-    // add to functions else if statement to create more variations of npc's
+    // add to else if statement to create more variations of npc's
     void selectCharacteristics()
     {
-        float rand = Random.Range(0, 2);
+        float rand = Random.Range(0, 5);
         if (rand == 1)
         {
-            inRangePower = "shoot";
-            outRangePower = "collect";
+            npcPower = "shoot";
+            shouldAttack = true;
+            health = 100;
+            speed = 10;
+            howclose = 10;
+        }
+        else if (rand == 2)
+        {
+            npcPower = "collect";
             health = 100;
             speed = 10;
             howclose = 10;
@@ -79,7 +85,6 @@ public class npcController : MonoBehaviour
 
         int randObjIndex = Random.Range(0, possibleObjArr.Length);
         associatedObj = possibleObjArr[randObjIndex];
-
     }
 
     // takes down npc's health based on the force a object hits them
@@ -112,21 +117,27 @@ public class npcController : MonoBehaviour
         }
     }
 
-    void inRangeManager()
+    // calls the relevant power method if npc is a threat
+    void threatNpcPowerManager()
     {
-        if (inRangePower == "shoot")
+        switch (npcPower)
         {
-            powerShoot();
+            case "shoot":
+                powerShoot();
+                break;
+        }
+    }
+    // calls the relevant power method if npc is harmless
+    void harmlessNpcPowerManager()
+    {
+        switch (npcPower)
+        {
+            case "collect":
+                powerCollect(transform.position, 10);
+                break;
         }
     }
 
-    void outRangeManager()
-    {
-        if (outRangePower == "collect")
-        {
-            powerCollect(transform.position, 10);
-        }
-    }
 
     /********** power: collect ***********/
 
