@@ -5,22 +5,22 @@ using System;
 
 public class worldController : MonoBehaviour
 {
-    public GameObject player;
-    private int worldSizeX = 40;
-    private int worldSizeZ = 40;
-    private int noiseHeight = 4;
-    private Vector3 startPosition;
-    public static Hashtable blockContainer = new Hashtable();
-    private List<Vector3> blockPositions = new List<Vector3>();
-    private GameObject objectToSpawn;
-    private bool loadSceneOnStart = true;
-    private GameObject[] blocks = new GameObject[20];
-    private Vector3 startPos;
-
     //when adding new zone create new arr below and amend selectZone()
     public GameObject[] zone1Arr;
     public GameObject[] zone2Arr;
     public GameObject[] zone3Arr;
+    public GameObject player;
+
+    int worldSizeX = 40;
+    int worldSizeZ = 40;
+    int noiseHeight = 4;
+    Vector3 startPosition;
+    public static Hashtable blockContainer = new Hashtable();
+    List<Vector3> blockPositions = new List<Vector3>();
+    GameObject objectToSpawn;
+    bool loadSceneOnStart = true;
+    GameObject[] blocks = new GameObject[20];
+    Vector3 startPos;
 
     void Start()
     {
@@ -56,7 +56,7 @@ public class worldController : MonoBehaviour
         }
     }
 
-    public int xPlayerMove
+    int xPlayerMove
     {
         get
         {
@@ -64,7 +64,7 @@ public class worldController : MonoBehaviour
         }
     }
 
-    public int zPlayerMove
+    int zPlayerMove
     {
         get
         {
@@ -72,7 +72,8 @@ public class worldController : MonoBehaviour
         }
     }
 
-    public void measurePlayerDis()
+    // calls selectZone() when the player has moved a certain dist
+    void measurePlayerDis()
     {
         float distTravalledX = Math.Abs(player.transform.position.x - startPos.x);
         float distTravalledZ = Math.Abs(player.transform.position.z - startPos.z);
@@ -84,7 +85,7 @@ public class worldController : MonoBehaviour
         }
     }
 
-    private int xPlayerLocation
+    int xPlayerLocation
     {
         get
         {
@@ -92,7 +93,7 @@ public class worldController : MonoBehaviour
         }
     }
 
-    private int zPlayerLocation
+    int zPlayerLocation
     {
         get
         {
@@ -100,14 +101,16 @@ public class worldController : MonoBehaviour
         }
     }
 
-    private float generateNoise(int x, int z, float detailScale)
+    // creates the terrain height
+    float generateNoise(int x, int z, float detailScale)
     {
         float xNoise = (x + this.transform.position.x) / detailScale;
         float zNoise = (z + this.transform.position.z) / detailScale;
         return Mathf.PerlinNoise(xNoise, zNoise);
     }
 
-    private void zones(GameObject[] zoneArr)
+    // assigns all the selected zone blocks to the zone that is being rendered
+    void zones(GameObject[] zoneArr)
     {
         for (int i = 0; i < zoneArr.Length; i++)
         {
@@ -115,7 +118,8 @@ public class worldController : MonoBehaviour
         }
     }
 
-    private void selectZone()
+    // Randomly selects a zone
+    void selectZone()
     {
         float changeZoneNum = UnityEngine.Random.Range(0f, 30f);
 
@@ -133,7 +137,8 @@ public class worldController : MonoBehaviour
         }
     }
 
-    private void selectBlocks()
+    // selects blocks based on conditional probability and assigns it as the current objectToSpawn when the terrain is being generated
+    void selectBlocks()
     {
         float randomSpawnNum = UnityEngine.Random.Range(0f, 50f);
 

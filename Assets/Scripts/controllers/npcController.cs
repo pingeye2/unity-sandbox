@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*  npcController -> all characteristics of the npc's are randomly selected on initialization  */
 public class npcController : MonoBehaviour
 {
     public Transform firePos;
     public GameObject[] possibleObjArr;
     public Mesh[] meshes;
+    public Material[] materials;
 
     Vector3 pos;
     float distToPlayer;
@@ -64,10 +64,15 @@ public class npcController : MonoBehaviour
         pos = new Vector3(x, 5, z);
     }
 
-    // add to else if statement to create more variations of npc's
+    // randomly selects the npc's characteristics on initialization
     void selectCharacteristics()
     {
-        GetComponent<MeshFilter>().mesh = meshes[Random.Range(0, meshes.Length)];
+        // assigns random mesh to gameObjects meshFilter & meshCollider
+        Mesh selectedMesh = meshes[Random.Range(0, meshes.Length)];
+        GetComponent<MeshFilter>().mesh = selectedMesh;
+        GetComponent<MeshCollider>().sharedMesh = selectedMesh;
+        // assigns a random material to gameObjects Renderer
+        gameObject.GetComponent<Renderer>().material = materials[Random.Range(0, materials.Length)];
         associatedObj = possibleObjArr[Random.Range(0, possibleObjArr.Length)];
         float rand = Random.Range(0, 5);
         if (rand == 1)
@@ -87,7 +92,7 @@ public class npcController : MonoBehaviour
         }
         else
         {
-            npcPower = "collect";
+            npcPower = "shoot";
             health = 100;
             speed = 10;
             howclose = 10;

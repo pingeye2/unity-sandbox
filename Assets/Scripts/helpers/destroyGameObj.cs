@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* add script to every prefab -> destroys the gameObj is too far away from player */
 public class destroyGameObj : MonoBehaviour
 {
     private Transform target;

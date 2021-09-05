@@ -41,12 +41,12 @@ GameObject:
   - component: {fileID: 1172105981561211480}
   - component: {fileID: 1172105981561211485}
   - component: {fileID: 1172105981561211482}
-  - component: {fileID: 1172105981561211483}
   - component: {fileID: 5165063300782918976}
   - component: {fileID: 1320882797159524910}
   - component: {fileID: 6618543015394895293}
+  - component: {fileID: 4013396566019050302}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: npcObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,20 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1172105981561211483
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172105981561211481}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5165063300782918976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,7 +128,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -166,6 +152,10 @@ MonoBehaviour:
   - {fileID: 4300000, guid: d7ad634caa1c049d49b730cc6d29c683, type: 3}
   - {fileID: 4300000, guid: 1e50ef3048667495d90210b70c070c6b, type: 3}
   - {fileID: 4300000, guid: 186ad8f063dbf430da4d56ebc0cb14e0, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 9418a5fcbafe84543998bd7c831a9ee1, type: 2}
+  - {fileID: 2100000, guid: 4f5f071a5fbbf7c49a0e879cff010929, type: 2}
+  - {fileID: 2100000, guid: 7443e746634ee474b8a2748d8fb7250e, type: 2}
 --- !u!114 &6618543015394895293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +168,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e14dac115719a49912b5a6d8aabf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &4013396566019050302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172105981561211481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1172105982167189915
 GameObject:
   m_ObjectHideFlags: 0

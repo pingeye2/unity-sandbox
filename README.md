@@ -8,5 +8,5 @@ Project conventions:
 
 TODO:
 
-- inventoryController -> backpack
-- npcController -> change mesh dynamically
+- worldController -> water physics
+- playerController -> backpack
