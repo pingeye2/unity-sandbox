@@ -24,15 +24,3 @@ public class procedural_generation : MonoBehaviour {
     }
 
 } 
-
-public class zone : MonoBehaviour {
-
-    public zone(GameObject[] zone_blocks) {
-       create_zone(zone_blocks);
-    }
-
-    private GameObject[] create_zone(GameObject[] arr) {
-        return arr;
-    }
-
-}
